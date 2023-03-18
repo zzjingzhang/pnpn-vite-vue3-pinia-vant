@@ -1,17 +1,28 @@
 <template>
   <div class="home">
-    <van-button type="primary">主要按钮</van-button>
-    <van-button type="success">成功按钮</van-button>
-    <van-button type="default">默认按钮</van-button>
-    <van-button type="warning">警告按钮</van-button>
-    <van-button type="danger">危险按钮</van-button>
-    <van-rate v-model="value" />
+    <home-nav-bar></home-nav-bar>
+    <div class="banner">
+      <img src="@/assets/img/home/banner.webp" alt="" />
+    </div>
+    <home-search-box></home-search-box>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-const value = ref(3)
+import HomeNavBar from './cpns/home-nav-bar.vue'
+import HomeSearchBox from './cpns/home-search-box.vue'
+import useHomeStore from '@/stores/modules/home'
+
+const homeStore = useHomeStore()
+homeStore.fetchHotSuggestsData()
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.home {
+  .banner {
+    img {
+      width: 100%;
+    }
+  }
+}
+</style>

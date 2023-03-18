@@ -8,7 +8,8 @@ const routes = [
     },
     {
         path: '/home',
-        component: () => import('@/views/home/home.vue')
+        component: () => import('@/views/home/home.vue'),
+
     },
     {
         path: '/favor',
@@ -21,6 +22,13 @@ const routes = [
     {
         path: '/message',
         component: () => import('@/views/message/message.vue')
+    },
+    {
+        path: '/city',
+        component: () => import('@/views/city/city.vue'),
+        // meta: {
+        //     hideTabBar: true
+        // }
     },
 ]
 
