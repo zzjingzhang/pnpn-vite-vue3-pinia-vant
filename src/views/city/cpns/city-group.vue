@@ -24,33 +24,33 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
-import useCityStore from '@/stores/modules/city'
+import { computed } from "vue";
+import { useRouter } from "vue-router";
+import useCityStore from "@/stores/modules/city";
 const props = defineProps({
   groupData: {
     type: Object,
     default: () => ({}),
   },
-})
+});
 
 // 动态索引
 const indexList = computed(() => {
-  const list = props.groupData.cities.map((item) => item.group)
-  list.unshift('#')
-  return list
-})
+  const list = props.groupData.cities.map((item) => item.group);
+  list.unshift("#");
+  return list;
+});
 
 // 监听城市点击
-const router = useRouter()
-const cityStore = useCityStore()
+const router = useRouter();
+const cityStore = useCityStore();
 const cityClick = (city) => {
   //  选中当前城市
-  cityStore.currentCity = city
+  cityStore.currentCity = city;
 
   // 返回上一级
-  router.back()
-}
+  router.back();
+};
 </script>
 
 <style lang="less" scoped>

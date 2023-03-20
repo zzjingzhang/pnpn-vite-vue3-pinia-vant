@@ -27,30 +27,30 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
-import { useRouter } from 'vue-router'
-import useCityStore from '@/stores/modules/city'
-import { storeToRefs } from 'pinia'
-import CityGroup from './cpns/city-group.vue'
+import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
+import useCityStore from "@/stores/modules/city";
+import { storeToRefs } from "pinia";
+import CityGroup from "./cpns/city-group.vue";
 
-const router = useRouter()
+const router = useRouter();
 
 // 搜索框功能
-const searchValue = ref('')
+const searchValue = ref("");
 const cancelClick = () => {
-  router.back()
-}
+  router.back();
+};
 
 // tab切换
-const tabActive = ref()
+const tabActive = ref();
 
 // 从store中拿数据
-const cityStore = useCityStore()
-cityStore.fetchAllCity()
-const { allCity } = storeToRefs(cityStore)
+const cityStore = useCityStore();
+cityStore.fetchAllCity();
+const { allCity } = storeToRefs(cityStore);
 
 // 获取选中标签后的数据
-const currentGroup = computed(() => allCity.value[tabActive.value])
+const currentGroup = computed(() => allCity.value[tabActive.value]);
 </script>
 
 <style lang="less" scoped>

@@ -21,11 +21,19 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import tabbarData from '@/assets/data/tabbar.js'
-import { getAssetURL } from '@/utils/load_assets.js'
+import { ref, watch } from "vue";
+import { useRoute } from "vue-router";
+import tabbarData from "@/assets/data/tabbar.js";
+import { getAssetURL } from "@/utils/load_assets.js";
 
-const currentIndex = ref(0)
+const route = useRoute();
+const currentIndex = ref(0);
+// 监听路由改变时，找到对应的索引，设置currentIndex
+watch(route, (newRoute) => {
+  const idx = tabbarData.findIndex((item) => item.path === newRoute.path);
+  if (idx === -1) return;
+  currentIndex.value = idx;
+});
 </script>
 
 <style lang="less" scoped>

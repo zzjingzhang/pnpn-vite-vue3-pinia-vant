@@ -21,19 +21,19 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import tabbarData from '@/assets/data/tabbar.js'
-import { getAssetURL } from '@/utils/load_assets.js'
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import tabbarData from "@/assets/data/tabbar.js";
+import { getAssetURL } from "@/utils/load_assets.js";
 
-const currentIndex = ref(0)
+const currentIndex = ref(0);
 
-const router = useRouter()
+const router = useRouter();
 
 const itemClick = (item, index) => {
-  currentIndex.value = index
-  router.push(item.path)
-}
+  currentIndex.value = index;
+  router.push(item.path);
+};
 </script>
 
 <style lang="less" scoped>

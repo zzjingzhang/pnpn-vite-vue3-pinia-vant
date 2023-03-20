@@ -16,6 +16,7 @@
   .title {
     color: var(--primary-color);
     font-size: 16px;
+    font-weight: 600;
   }
 }
 </style>

@@ -1,7 +1,7 @@
-import myRequest from '../request/index'
+import myRequest from "../request/index";
 
 export function getCityAll() {
-    return myRequest.get({
-        url: '/city/all'
-    })
+  return myRequest.get({
+    url: "/city/all",
+  });
 }
