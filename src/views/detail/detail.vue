@@ -4,6 +4,7 @@
       v-if="showTabControl"
       class="tabs"
       :titles="names"
+      :curIndex="currentIndex"
       @tabItemClick="tabClick"
     />
     <van-nav-bar
@@ -54,7 +55,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getDetailInfosByHouseId } from "@/services";
 import useScroll from "@/hooks/useScroll";
@@ -100,19 +101,42 @@ const getSectionRef = (value) => {
   const name = value.$el.getAttribute("name");
   sectionEls.value[name] = value.$el;
 };
+let isClick = false;
+let currentDistance = -1;
 const tabClick = (index) => {
   const key = Object.keys(sectionEls.value)[index];
   const el = sectionEls.value[key];
-  let instance = el.offsetTop;
+  let distance = el.offsetTop;
   if (index !== 0) {
-    instance = instance - 44;
+    distance = distance - 44;
   }
-
+  isClick = true;
+  currentDistance = distance;
   detailRef.value.scrollTo({
-    top: instance,
+    top: distance,
     behavior: "smooth",
   });
 };
+
+// 页面滚动时匹配对应的tabControll的index
+const currentIndex = ref(0);
+watch(scrollTop, (newValue) => {
+  if (newValue === currentDistance) {
+    isClick = false;
+  }
+  if (isClick) return;
+  // 获取所有的区域offsetTops
+  const els = Object.values(sectionEls.value);
+  const values = els.map((el) => el.offsetTop);
+  let index = values.length - 1;
+  for (let i = 0; i < values.length; i++) {
+    if (values[i] > newValue + 44) {
+      index = i - 1;
+      break;
+    }
+  }
+  currentIndex.value = index;
+});
 </script>
 
 <style lang="less" scoped>

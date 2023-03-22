@@ -13,12 +13,16 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
-defineProps({
+const props = defineProps({
   titles: {
     type: Array,
     default: () => [],
+  },
+  curIndex: {
+    type: Number,
+    default: 0,
   },
 });
 const emit = defineEmits(["tabItemClick"]);
@@ -27,6 +31,16 @@ const itemClick = (index) => {
   currentIndex.value = index;
   emit("tabItemClick", index);
 };
+
+watch(
+  () => props.curIndex,
+  (newIndex) => {
+    currentIndex.value = newIndex;
+  },
+  {
+    deep: true,
+  }
+);
 </script>
 
 <style lang="less" scoped>

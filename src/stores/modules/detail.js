@@ -8,7 +8,6 @@ const useDetailStore = defineStore("detail", {
   actions: {
     async fetchDetailInfos(houseId) {
       const res = await getDetailInfosByHouseId(houseId);
-      console.log(res);
     },
   },
 });
